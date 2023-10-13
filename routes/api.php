@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('user')->group(function () {
+    Route::post('/create', [UserController::class, 'store']);
+
+    Route::middleware(['auth:sanctum'])->get('/', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('email-verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
 });
+
+Route::post('/auth/login', [AuthController::class, 'store'])->middleware('guest');
