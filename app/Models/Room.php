@@ -22,7 +22,7 @@ class Room extends Model
         'status',
     ];
 
-    public function users(): BelongsToMany
+    public function players(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'room_players', 'room_id', 'user_id')
             ->withPivot('cards', 'is_owner', 'online')

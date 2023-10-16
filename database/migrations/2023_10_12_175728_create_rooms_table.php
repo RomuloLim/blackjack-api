@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->default('Room');
             $table->string('deck_id')->nullable();
             $table->smallInteger('max_players')->default(5);
             $table->smallInteger('min_players')->default(2);
