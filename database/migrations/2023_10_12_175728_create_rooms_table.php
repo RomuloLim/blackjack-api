@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('deck_id')->nullable();
             $table->smallInteger('max_players')->default(5);
             $table->smallInteger('min_players')->default(2);
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->tinyText('status')->default(RoomStatus::AwaitingPlayers);
             $table->timestamps();
         });

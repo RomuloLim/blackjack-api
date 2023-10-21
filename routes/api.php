@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,5 +26,12 @@ Route::prefix('user')->group(function () {
 
     Route::get('email-verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
 });
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('room')->group(function() {
+        Route::post('/create', [RoomController::class, 'store'])->name('room.create');
+    });
+});
+
 
 Route::post('/auth/login', [AuthController::class, 'store'])->middleware('guest');
