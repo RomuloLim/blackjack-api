@@ -16,10 +16,12 @@ class Room extends Model
     protected $table = 'rooms';
 
     protected $fillable = [
+        'name',
         'deck_id',
         'max_players',
         'min_players',
         'status',
+        'user_id',
     ];
 
     public function players(): BelongsToMany
