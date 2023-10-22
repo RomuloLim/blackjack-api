@@ -18,8 +18,7 @@ This API contains routes to authenticate users and room owners, create rooms, jo
 
 Technologies that I used to develop this API
 
-<img src="https://img.shields.io/badge/laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=fff&labelColor=FF2D20" />
-<img src="https://img.shields.io/badge/postgres-0064a5?style=for-the-badge&logo=postgresql&logoColor=fff&labelColor=0064a5" />
+<img src="https://img.shields.io/badge/laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=fff&labelColor=FF2D20" /> <img src="https://img.shields.io/badge/postgres-0064a5?style=for-the-badge&logo=postgresql&logoColor=fff&labelColor=0064a5" />
 
 ## 📖 External API
 This project uses the [Deck of Cards API](https://deckofcardsapi.com/) to generate the cards.
