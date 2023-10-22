@@ -5,8 +5,11 @@ namespace Tests\Feature\Room;
 use App\Enums\RoomStatus;
 use App\Models\Room;
 use App\Models\User;
+use Database\Seeders\PermissionSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Testing\Fluent\AssertableJson;
+use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
@@ -14,17 +17,25 @@ class CreateTest extends TestCase
 {
     use DatabaseMigrations, DatabaseTransactions;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(PermissionSeeder::class);
+    }
+
     /** @test */
     public function it_should_allow_an_authenticated_user_can_create_a_room(): void
     {
         $this->withoutExceptionHandling();
-        $this->seed();
-
-        $user = User::factory()->create()->assignRole('dealer');
 
         $roomData = Room::factory()->raw();
 
-        $response = $this->actingAs($user)->postJson(route('room.create'), $roomData);
+        $user = User::factory()->create()->givePermissionTo('create_room');
+
+        $this->actingAs($user);
+
+        $response = $this->postJson(route('room.create'), $roomData);
 
         $this->assertDatabaseHas(Room::class, [
             ...$roomData,
@@ -36,16 +47,70 @@ class CreateTest extends TestCase
     }
 
     /** @test */
-    public function it_should_forbid_an_authenticated_user_can_create_a_room()
+    public function it_should_forbid_an_unauthenticated_user_can_create_a_room()
     {
-        $this->withoutExceptionHandling();
-
         $roomData = Room::factory()->raw();
         $response = $this->postJson(route('room.create'), $roomData);
 
-        dd($response->getContent());
+        $response->assertUnauthorized();
+        $this->assertDatabaseEmpty(Room::class);
+    }
+
+    /** @test */
+    public function it_should_to_forbid_an_user_without_role_can_create_a_room()
+    {
+        $roomData = Room::factory()->raw();
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $response = $this->postJson(route('room.create'), $roomData);
 
         $response->assertForbidden();
         $this->assertDatabaseEmpty(Room::class);
+    }
+
+    /** @test */
+    public function it_should_fail_validation_when_creating_room_without_name(): void
+    {
+        $roomData = Room::factory()->raw([
+            'name' => null,
+        ]);
+
+        $user = User::factory()->create()->givePermissionTo('create_room');
+
+        $this->actingAs($user);
+
+        $response = $this->postJson(route('room.create'), $roomData);
+
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $response->assertJsonValidationErrors('name');
+
+        $this->assertDatabaseEmpty(Room::class);
+    }
+
+    /** @test */
+    public function it_should_fail_validation_when_creating_with_duplicated_name()
+    {
+        $roomData = Room::factory()->raw();
+
+        $user = User::factory()->create()->givePermissionTo('create_room');
+
+        $this->actingAs($user);
+
+        $this->postJson(route(('room.create'), $roomData));
+
+        $secondRequest = $this->postJson(route('room.create'), $roomData);
+
+
+        $secondRequest->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $secondRequest->assertJsonValidationErrors('name');
+        $secondRequest->assertJson(fn (AssertableJson $json) => $json->hasAll(['message', 'errors'])
+            ->where('message', 'The name has already been taken.')
+            ->etc()
+        );
+
+        $this->assertDatabaseCount(Room::class, 1);
     }
 }
