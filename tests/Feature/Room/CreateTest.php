@@ -91,7 +91,7 @@ class CreateTest extends TestCase
     }
 
     /** @test */
-    public function it_should_fail_validation_when_creating_with_duplicated_name()
+    public function it_should_fail_validation_when_creating_with_duplicated_name_and_not_finished_status()
     {
         $roomData = Room::factory()->raw();
 
@@ -102,7 +102,6 @@ class CreateTest extends TestCase
         $this->postJson(route(('room.create'), $roomData));
 
         $secondRequest = $this->postJson(route('room.create'), $roomData);
-
 
         $secondRequest->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $secondRequest->assertJsonValidationErrors('name');
