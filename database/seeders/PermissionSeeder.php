@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -20,7 +19,7 @@ class PermissionSeeder extends Seeder
                 'join_room',
                 'leave_room',
                 'deposit',
-                'withdraw'
+                'withdraw',
             ],
             'dealer' => [
                 'join_room',
@@ -28,8 +27,8 @@ class PermissionSeeder extends Seeder
                 'create_room',
                 'delete_room',
                 'start_game',
-                'kick_user'
-            ]
+                'kick_user',
+            ],
         ];
 
         $permissions = [
@@ -42,7 +41,7 @@ class PermissionSeeder extends Seeder
             'delete_user',
             'deposit',
             'withdraw',
-            'kick_user'
+            'kick_user',
         ];
 
         foreach ($permissions as $permission) {

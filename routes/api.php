@@ -28,10 +28,9 @@ Route::prefix('user')->group(function () {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::prefix('room')->group(function() {
+    Route::prefix('room')->group(function () {
         Route::post('/create', [RoomController::class, 'store'])->name('room.create');
     });
 });
-
 
 Route::post('/auth/login', [AuthController::class, 'store'])->middleware('guest');

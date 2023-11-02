@@ -10,15 +10,14 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
     public function store(AuthLoginRequest $request)
     {
-       $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
@@ -26,7 +25,7 @@ class AuthController extends Controller
 
         $user->tokens()->delete();
 
-        if(!$user->hasVerifiedEmail()) {
+        if (! $user->hasVerifiedEmail()) {
             throw ValidationException::withMessages([
                 'email' => ['The provided email is not verified.'],
             ]);

@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Enums\RoomStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class CreateRoomRequest extends FormRequest
@@ -23,8 +22,8 @@ class CreateRoomRequest extends FormRequest
                 'string',
                 'max:255',
                 Rule::unique('rooms')->where(function ($query) {
-                   return $query->where('name', $this->name)
-                       ->whereNot('status', RoomStatus::Finished);
+                    return $query->where('name', $this->name)
+                        ->whereNot('status', RoomStatus::Finished);
                 }),
             ],
         ];
