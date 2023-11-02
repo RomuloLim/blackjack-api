@@ -29,7 +29,7 @@ do
     git add "${FILE}";
 done;
 
-echo "\n\n${BGreen}                                      ${NC}";
+echo "\n\n${BGreen}                                    ${NC}";
 echo "${BGreen} Tudo certo! Push autorizado 👮🏽🎉 ${NC}";
-echo "${BGreen}                                      ${NC}\n\n";
+echo "${BGreen}                                    ${NC}\n\n";
 exit 0;
