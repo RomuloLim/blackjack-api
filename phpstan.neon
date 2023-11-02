@@ -2,6 +2,8 @@ includes:
     - ./vendor/nunomaduro/larastan/extension.neon
 
 parameters:
+    checkGenericClassInNonGenericObjectType: false
+
     scanFiles:
         - _ide_helper.php
         - _ide_helper_models.php
@@ -11,7 +13,7 @@ parameters:
         - app/
 
     # Level 9 is the highest level
-    level: 5
+    level: 6
 
     ignoreErrors:
         - '#^Call to an undefined method Illuminate\\#'
