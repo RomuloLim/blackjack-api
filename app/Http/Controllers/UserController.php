@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserController extends Controller
 {
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request): JsonResource
     {
         $data = $request->validated();
 

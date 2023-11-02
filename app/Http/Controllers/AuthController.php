@@ -6,6 +6,7 @@ use App\Exceptions\EmailException;
 use App\Http\Requests\AuthLoginRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +14,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function store(AuthLoginRequest $request)
+    public function store(AuthLoginRequest $request): JsonResponse
     {
         $user = User::where('email', $request->email)->first();
 
@@ -37,7 +38,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function verifyEmail(Request $request, $id, $hash): RedirectResponse
+    public function verifyEmail(Request $request, int $id, string $hash): RedirectResponse
     {
         $user = User::find($id);
 

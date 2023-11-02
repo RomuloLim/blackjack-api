@@ -1,0 +1,41 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Http\\\\Request\\:\\:expectsJson\\(\\)\\.$#"
+			count: 1
+			path: app/Http/Middleware/Authenticate.php
+
+		-
+			message: "#^Access to undefined constant Illuminate\\\\Http\\\\Request\\:\\:HEADER_X_FORWARDED_AWS_ELB\\.$#"
+			count: 1
+			path: app/Http/Middleware/TrustProxies.php
+
+		-
+			message: "#^Access to undefined constant Illuminate\\\\Http\\\\Request\\:\\:HEADER_X_FORWARDED_FOR\\.$#"
+			count: 1
+			path: app/Http/Middleware/TrustProxies.php
+
+		-
+			message: "#^Access to undefined constant Illuminate\\\\Http\\\\Request\\:\\:HEADER_X_FORWARDED_HOST\\.$#"
+			count: 1
+			path: app/Http/Middleware/TrustProxies.php
+
+		-
+			message: "#^Access to undefined constant Illuminate\\\\Http\\\\Request\\:\\:HEADER_X_FORWARDED_PORT\\.$#"
+			count: 1
+			path: app/Http/Middleware/TrustProxies.php
+
+		-
+			message: "#^Access to undefined constant Illuminate\\\\Http\\\\Request\\:\\:HEADER_X_FORWARDED_PROTO\\.$#"
+			count: 1
+			path: app/Http/Middleware/TrustProxies.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Http\\\\Request\\:\\:ip\\(\\)\\.$#"
+			count: 1
+			path: app/Providers/RouteServiceProvider.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Http\\\\Request\\:\\:user\\(\\)\\.$#"
+			count: 1
+			path: app/Providers/RouteServiceProvider.php

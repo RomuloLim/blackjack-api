@@ -1,0 +1,24 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    scanFiles:
+        - _ide_helper.php
+        - _ide_helper_models.php
+        - .phpstorm.meta.php
+
+    paths:
+        - app/
+
+    # Level 9 is the highest level
+    level: 5
+
+    ignoreErrors:
+        - '#^Call to an undefined method Illuminate\\#'
+        - '#^Access to undefined constant Illuminate\\#'
+
+#
+#    excludePaths:
+#        - ./*/*/FileToBeExcluded.php
+#
+#    checkMissingIterableValueType: false

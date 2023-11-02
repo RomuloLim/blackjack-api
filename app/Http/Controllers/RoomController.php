@@ -12,7 +12,7 @@ class RoomController extends Controller
 {
     public function store(CreateRoomRequest $request): JsonResponse
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         $room = Room::create([
             ...$data,
