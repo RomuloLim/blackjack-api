@@ -25,7 +25,7 @@ class RoomFactory extends Factory
             'name' => $this->faker->name,
             'deck_id' => null, // TODO: call decks api to get a deck id
             'max_players' => $this->faker->numberBetween(4, 8),
-            'min_players' => $this->faker->numberBetween(1, 3),
+            'min_players' => $this->faker->numberBetween(2, 3),
             'status' => $roomStatus[array_rand($roomStatus)],
         ];
     }

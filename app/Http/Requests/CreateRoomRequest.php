@@ -9,8 +9,6 @@ use Illuminate\Validation\Rule;
 
 class CreateRoomRequest extends FormRequest
 {
-    protected string $name;
-
     public function authorize(): bool
     {
         return Auth::check() && Auth::user()->hasPermissionTo('create_room');
@@ -31,6 +29,8 @@ class CreateRoomRequest extends FormRequest
                         ->whereNot('status', RoomStatus::Finished);
                 }),
             ],
+            'max_players' => ['nullable', 'integer', 'min:2', 'max:8'],
+            'min_players' => ['nullable', 'integer', 'min:2', 'max:10'],
         ];
     }
 }
