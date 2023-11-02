@@ -1,6 +1,11 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+NC='\033[0m'
+BBlue='\033[1;34m'
+BRed='\033[1;31m'
+
+
 # Rodar o phpstan
 ./vendor/bin/phpstan
 if [ $? -ne 0 ]; then
@@ -24,4 +29,6 @@ do
     git add "${FILE}";
 done;
 
+
+echo -e "${BRed} Tudo certo! Commit autorizado 👮🏽🎉 ${NC}";
 exit 0;
