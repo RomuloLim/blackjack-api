@@ -4,8 +4,8 @@ namespace App\Services\DeckService\Entities;
 
 class Pile
 {
-    public function __construct(array $piles)
+    public function __construct()
     {
-        //todo identify the pile attributes
+        //TODO: identify the pile attributes
     }
 }

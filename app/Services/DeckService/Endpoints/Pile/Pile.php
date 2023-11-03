@@ -3,6 +3,7 @@
 namespace App\Services\DeckService\Endpoints\Pile;
 
 use App\Services\DeckService\CardService;
+use Illuminate\Http\Client\Response;
 
 class Pile
 {
@@ -15,7 +16,7 @@ class Pile
         $this->cardService = new CardService();
     }
 
-    public function fromDeck(string $deckId, string $pileName = 'default')
+    public function fromDeck(string $deckId, string $pileName = 'default'): Pile
     {
         $this->deckId = $deckId;
         $this->currentPile = $pileName;
@@ -24,7 +25,7 @@ class Pile
         return $this;
     }
 
-    public function list()
+    public function list(): Response
     {
         return $this->cardService->api->get("/{$this->deckId}/pile/{$this->currentPile}/list");
     }
