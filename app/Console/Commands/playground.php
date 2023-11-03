@@ -26,9 +26,9 @@ class playground extends Command
      */
     public function handle(): void
     {
-        $service = new CardService();
+        $service = app(CardService::class)->piles();
 
-        $deck = $service->decks()->create();
+        $deck = $service->fromDeck('3kxnutiwzzis', 'dealer')->list();
 
         dd($deck->object());
     }

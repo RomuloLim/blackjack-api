@@ -22,4 +22,9 @@ class Deck
 
         return $this->cardService->api->get("/new/?deck_count=$amount");
     }
+
+    public function draw(string $deckId, int $amount = 1): Response
+    {
+        return $this->cardService->api->get("/$deckId/draw/?count=$amount");
+    }
 }
