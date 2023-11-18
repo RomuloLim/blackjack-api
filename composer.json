@@ -16,6 +16,7 @@
         "barryvdh/laravel-ide-helper": "^2.13",
         "brianium/paratest": "^7.3",
         "fakerphp/faker": "^1.9.1",
+        "laradumps/laradumps": "^2.2",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.4.4",
@@ -49,6 +50,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "analyze": [
+            "vendor/bin/phpstan analyze"
         ]
     },
     "extra": {
