@@ -3,6 +3,8 @@
 namespace App\Services\DeckService\Endpoints\Pile;
 
 use App\Services\DeckService\CardService;
+use App\Services\DeckService\Entities\Card;
+use App\Services\DeckService\Entities\Deck;
 use Illuminate\Http\Client\Response;
 
 class Pile
@@ -21,12 +23,22 @@ class Pile
         $this->deckId = $deckId;
         $this->currentPile = $pileName;
 
-
         return $this;
     }
 
-    public function list(): Response
+    public function list(): Deck
     {
-        return $this->cardService->api->get("/{$this->deckId}/pile/{$this->currentPile}/list");
+        $response = $this->cardService->api->get("/{$this->deckId}/pile/{$this->currentPile}/list");
+
+        return new Deck($response->json());
+    }
+
+    public function add(array $cards): Deck
+    {
+        $formattedCards = implode(',', $cards);
+
+        $response = $this->cardService->api->get("/{$this->deckId}/pile/{$this->currentPile}/add?cards=$formattedCards");
+
+        return new Deck($response->json());
     }
 }

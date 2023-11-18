@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Services\DeckService\CardService;
+use App\Services\DeckService\Entities\Card;
+use App\Services\DeckService\Entities\Pile;
 use Illuminate\Console\Command;
 
 class playground extends Command
@@ -30,6 +32,6 @@ class playground extends Command
 
         $deck = $service->fromDeck('3kxnutiwzzis', 'dealer')->list();
 
-        ds($deck->object());
+        
     }
 }
