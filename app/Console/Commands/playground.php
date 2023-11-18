@@ -28,11 +28,6 @@ class playground extends Command
      */
     public function handle(): void
     {
-        $service = app(CardService::class)->piles();
-
-        $deck = $service->fromDeck('3kxnutiwzzis', 'dealer')->list();
-
-//        $deck->piles->first()->
-
+        ds('playground!');
     }
 }
