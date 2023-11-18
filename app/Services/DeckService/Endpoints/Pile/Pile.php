@@ -33,6 +33,9 @@ class Pile
         return new Deck($response->json());
     }
 
+    /**
+     * @param array<string> $cards
+     */
     public function add(array $cards): Deck
     {
         $formattedCards = implode(',', $cards);

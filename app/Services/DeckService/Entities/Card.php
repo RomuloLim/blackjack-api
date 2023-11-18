@@ -8,8 +8,13 @@ class Card
     public string $value;
     public string $suit;
     public string $image;
+
+    /** @var array<string> */
     public array $images;
 
+    /**
+     * @param array<string|array, mixed> $attributes
+     */
     public function __construct(array $attributes)
     {
         $this->code = data_get($attributes, 'code');

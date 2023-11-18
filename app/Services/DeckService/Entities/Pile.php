@@ -8,7 +8,7 @@ class Pile
 {
 
     /**
-     * @var Collection<array,Card>
+     * @var Collection<string,Card>
      */
     public Collection $cards;
     public string $name;

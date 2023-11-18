@@ -3,11 +3,10 @@
 namespace App\Services\DeckService\Entities;
 
 use Illuminate\Support\Collection;
-
 class Deck
 {
     /**
-     * @var Collection<array,Pile>
+     * @var ?Collection<string,Pile> $piles
      */
     public ?Collection $piles;
     public bool $success;

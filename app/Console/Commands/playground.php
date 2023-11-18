@@ -32,6 +32,7 @@ class playground extends Command
 
         $deck = $service->fromDeck('3kxnutiwzzis', 'dealer')->list();
 
-        
+//        $deck->piles->first()->
+
     }
 }
