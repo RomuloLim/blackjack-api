@@ -30,19 +30,22 @@ This project uses the [Deck of Cards API](https://deckofcardsapi.com/) to genera
 - [Docker](https://www.docker.com/)
 
 **Installation Steps**
-Clone the repository
+Clone the repository and navigate to project directory
 ```sh
 git clone https://github.com/RomuloLim/blackjack-api.git
-```
-
-```sh
 cd blackjack-api
 ```
 
-Start containers with Docker
+Install the application's dependencies
 ```sh
-docker compose up -d
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
 ```
+> _This command uses a small Docker container containing PHP and Composer to install the application's dependencies_
 
 ## ✏️What I learned with this project?
 When I started this project, I learned new things about API development and how to organize external API calls in a Laravel project.
