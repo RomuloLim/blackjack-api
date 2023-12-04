@@ -47,6 +47,14 @@ docker run --rm \
 ```
 > _This command uses a small Docker container containing PHP and Composer to install the application's dependencies_
 
+Start the Sail container
+
+```sh
+./vendor/bin/sail up -d --build
+```
+
+Cool! Now the project is running on `localhost`
+
 ## ✏️What I learned with this project?
 When I started this project, I learned new things about API development and how to organize external API calls in a Laravel project.
 I also learned how to use GitHooks to do tests and code style checks before shipping the code.
