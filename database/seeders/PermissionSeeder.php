@@ -15,7 +15,7 @@ class PermissionSeeder extends Seeder
     {
         $roles = [
             'admin',
-            'user' => [
+            'player' => [
                 'join_room',
                 'leave_room',
                 'deposit',
