@@ -111,4 +111,10 @@ class CreateTest extends TestCase
 
         $this->assertDatabaseCount(Room::class, 1);
     }
+
+    /** @test*/
+    public function it_should_()
+    {
+
+    }
 }
