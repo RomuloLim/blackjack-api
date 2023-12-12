@@ -22,4 +22,9 @@ class RoomController extends Controller
 
         return new RoomResource($room);
     }
+
+    public function joinRoom(Room $room)
+    {
+        //
+    }
 }

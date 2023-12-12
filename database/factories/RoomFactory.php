@@ -27,14 +27,17 @@ class RoomFactory extends Factory
             'max_players' => $this->faker->numberBetween(4, 8),
             'min_players' => $this->faker->numberBetween(2, 3),
             'status' => $roomStatus[array_rand($roomStatus)],
+            'user_id' => UserFactory::new(),
         ];
     }
 
     public function configure(): RoomFactory
     {
         return $this->afterCreating(function (Room $room) {
-            $user = User::factory()->create();
+
+            $user = User::find($room->user_id);
             $user->assignRole('dealer');
+
             $room->players()->attach($user->id, [
                 'is_owner' => true,
                 'online' => true,

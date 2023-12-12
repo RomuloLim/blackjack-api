@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Room;
 use App\Services\DeckService\CardService;
 use App\Services\DeckService\Entities\Card;
 use App\Services\DeckService\Entities\Pile;
@@ -28,6 +29,7 @@ class playground extends Command
      */
     public function handle(): void
     {
+        Room::factory()->create();
         ds('playground!');
     }
 }

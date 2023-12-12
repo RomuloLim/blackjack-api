@@ -14,6 +14,16 @@ class RoomPlayer extends Pivot
 
     protected $table = 'room_players';
 
+    protected $casts = [
+        'cards' => 'array',
+    ];
+
+    protected $attributes = [
+        'cards' => '[]',
+        'is_owner' => false,
+        'online' => true,
+    ];
+
     protected $fillable = [
         'room_id',
         'user_id',

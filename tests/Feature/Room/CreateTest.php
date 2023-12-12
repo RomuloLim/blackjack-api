@@ -5,24 +5,13 @@ namespace Tests\Feature\Room;
 use App\Enums\RoomStatus;
 use App\Models\Room;
 use App\Models\User;
-use Database\Seeders\PermissionSeeder;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class CreateTest extends TestCase
 {
-    use DatabaseMigrations, DatabaseTransactions;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->seed(PermissionSeeder::class);
-    }
-
     /** @test */
     public function it_should_allow_an_authenticated_user_can_create_a_room(): void
     {
@@ -32,7 +21,7 @@ class CreateTest extends TestCase
 
         $user = User::factory()->create()->givePermissionTo('create_room');
 
-        $this->actingAs($user);
+        Sanctum::actingAs($user);
 
         $response = $this->postJson(route('room.create'), $roomData);
 
@@ -62,7 +51,7 @@ class CreateTest extends TestCase
 
         $user = User::factory()->create();
 
-        $this->actingAs($user);
+        Sanctum::actingAs($user);
 
         $response = $this->postJson(route('room.create'), $roomData);
 
@@ -79,7 +68,7 @@ class CreateTest extends TestCase
 
         $user = User::factory()->create()->givePermissionTo('create_room');
 
-        $this->actingAs($user);
+        Sanctum::actingAs($user);
 
         $response = $this->postJson(route('room.create'), $roomData);
 
@@ -96,7 +85,7 @@ class CreateTest extends TestCase
 
         $user = User::factory()->create()->givePermissionTo('create_room');
 
-        $this->actingAs($user);
+        Sanctum::actingAs($user);
 
         $this->postJson(route(('room.create'), $roomData));
 
@@ -110,11 +99,5 @@ class CreateTest extends TestCase
         );
 
         $this->assertDatabaseCount(Room::class, 1);
-    }
-
-    /** @test*/
-    public function it_should_()
-    {
-
     }
 }

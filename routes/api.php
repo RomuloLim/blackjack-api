@@ -30,6 +30,7 @@ Route::prefix('user')->group(function () {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('room')->group(function () {
         Route::post('/create', [RoomController::class, 'store'])->name('room.create');
+        Route::post('/join/{room}', [RoomController::class, 'joinRoom'])->name('room.join');
     });
 });
 
