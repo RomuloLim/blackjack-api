@@ -15,8 +15,7 @@ then
 fi;
 
 # rodar os testes
-php artisan test --parallel | php
-if ! make mytarget;
+if ! php artisan test --parallel | php;
 then
     echo "${BGreen} Opa! os testes encontraram erros. Corrija antes de continuar... 👮🏽 ${NC}";
     exit 1;
