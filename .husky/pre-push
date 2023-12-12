@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 NC='\033[0m'
-BRed='\033[0;41m'
+BGRed='\033[0;41m'
 BGreen='\033[30;42m'
 
 
@@ -15,9 +15,11 @@ then
 fi;
 
 # rodar os testes
-if ! php artisan test --parallel | php;
+if ! php artisan test --parallel --stop-on-failure;
 then
-    echo "${BGreen} Opa! os testes encontraram erros. Corrija antes de continuar... 👮🏽 ${NC}";
+    echo "\n\n${BGRed}                                                                      ${NC}";
+    echo "${BGRed} Opa! os testes encontraram erros. Corrija antes de continuar... 👮🏽 ${NC}";
+    echo "${BGRed}                                                                      ${NC}\n\n";
     exit 1;
 fi;
 
