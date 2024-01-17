@@ -15,13 +15,14 @@ class RoomResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'deck_id' => $this->deck_id,
             'max_players' => $this->max_players,
             'min_players' => $this->min_players,
             'status' => $this->status,
             'user_id',
-            'user' => new UserResource($this->whenLoaded('user')),
+            'players_count' => $this->players_count,
         ];
     }
 }

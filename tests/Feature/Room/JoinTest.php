@@ -17,7 +17,9 @@ class JoinTest extends TestCase
     {
         $user = User::factory()->create()->givePermissionTo('join_room');
 
-        $room = Room::factory()->create();
+        $room = Room::factory()->create([
+            'status' => 'awaiting_players',
+        ]);
 
         Sanctum::actingAs($user);
 
@@ -34,11 +36,9 @@ class JoinTest extends TestCase
         ]);
 
         $response->assertJson(fn (AssertableJson $json) =>
-            $json->where('data.room_status', 'awaiting_players')
-                ->where('data.players', 1)
-                ->where('data.room_id', $room->id)
-                ->where('data.user_id', $user->id)
-                ->where('data.cards', [])
+            $json->where('data.status', 'awaiting_players')
+                ->where('data.players_count', 2) //dealer + player
+                ->where('data.id', $room->id)
                 ->etc()
         );
     }
@@ -46,7 +46,16 @@ class JoinTest extends TestCase
     /** @test */
     public function it_should_forbid_an_unauthenticated_user_can_join_on_room(): void
     {
-        $this->assertTrue(true);
+        $user = User::factory()->create()->givePermissionTo('join_room');
+
+        $room = Room::factory()->create([
+            'status' => 'awaiting_players',
+        ]);
+
+        $response = $this->postJson(route('room.join', $room->id));
+
+        $response->assertUnauthorized();
+        $this->assertDatabaseCount(RoomPlayer::class, 1); // only dealer
     }
 
     /** @test */
